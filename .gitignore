@@ -1,0 +1,12 @@
+# Dataset folders
+dataset/
+data/
+annotations/
+images/
+
+
+*.zip
+*.csv
+*.jpg
+*.jpeg
+*.png

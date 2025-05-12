@@ -1,0 +1,5 @@
+opencv-python
+sahi==0.11
+ultralytics>=8.0.0
+numpy
+xmltodict
