@@ -1,4 +1,7 @@
 # YOLOv8n_yellow-sticky-traps
+Dự án sử dụng mô hình YOLOv8n cho bài toán nhận diện côn trùng trên bẫy dính vàng trong nhà kính.
+
+
 ##
 Nếu chạy trên kaggle chỉ cần tải file notebook và import vào kaggle.
 
