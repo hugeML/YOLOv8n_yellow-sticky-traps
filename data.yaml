@@ -1,0 +1,7 @@
+
+train: /kaggle/working/yolo_dataset/images/train
+val: /kaggle/working/yolo_dataset/images/val
+test: /kaggle/working/yolo_dataset/images/test
+
+nc: 3
+names: ['MR', 'NC', 'WF']

@@ -1,42 +1,45 @@
-from ultralytics import YOLO
-import argparse
+from data_preparation import * 
 
-def train_model(config):
-    # Load a model
-    model = YOLO(config['model_type'] + '.pt')  # load a pretrained model
-    
-    # Train the model
-    results = model.train(
-        data=config['data_yaml'],
-        epochs=config['epochs'],
-        imgsz=config['imgsz'],
-        batch=config['batch'],
-        name=config['name'],
-        device=config['device']
-    )
-    
-    return results
+# Load model YOLOv8n (pretrained)
+model = YOLO('yolov8n.pt')
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Train YOLOv8 model')
-    parser.add_argument('--data', type=str, default='data/yolo_dataset/data.yaml', help='Path to data.yaml')
-    parser.add_argument('--epochs', type=int, default=150, help='Number of epochs')
-    parser.add_argument('--imgsz', type=int, default=1024, help='Image size')
-    parser.add_argument('--batch', type=int, default=16, help='Batch size')
-    parser.add_argument('--model', type=str, default='yolov8n', help='Model type (yolov8n, yolov8s, etc.)')
-    parser.add_argument('--name', type=str, default='exp', help='Experiment name')
-    parser.add_argument('--device', type=str, default='0', help='Device to use (e.g., 0 for GPU or "cpu")')
-    
-    args = parser.parse_args()
-    
-    config = {
-        'data_yaml': args.data,
-        'epochs': args.epochs,
-        'imgsz': args.imgsz,
-        'batch': args.batch,
-        'model_type': args.model,
-        'name': args.name,
-        'device': args.device
-    }
-    
-    train_model(config)
+# Train
+model.train(
+    data='data.yaml',
+    epochs=250,
+    imgsz=640,
+    batch=32,
+    device='cuda',              # hoặc 'cpu' nếu không có GPU
+    project='main',             # thư mục lưu kết quả huấn luyện
+    name='yolov8n_insects',
+    pretrained=True,
+    optimizer='AdamW',
+    lr0=0.001,
+    lrf=0.01,
+    warmup_epochs=3,
+    hsv_h=0.015,
+    hsv_s=0.7,
+    hsv_v=0.4,
+    degrees=0.0,
+    translate=0.0,
+    scale=0.5,
+    shear=0.0,
+    perspective=0.0,
+    mosaic=1.0,
+    mixup=0.0,
+    patience=50,
+    close_mosaic=15
+)
+# Load mô hình tốt nhất sau khi train
+best_model = YOLO('main/yolov8n_insects/weights/best.pt')
+
+# Đánh giá trên tập test
+metrics = best_model.val(
+    data='data.yaml',
+    split='test',
+    save=True,
+    save_json=True
+)
+
+print("Evaluation hoàn tất!")
+print(metrics)

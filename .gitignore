@@ -4,9 +4,17 @@ data/
 annotations/
 images/
 
+yolo_dataset/
+images/
+labels/
+
 
 *.zip
 *.csv
 *.jpg
 *.jpeg
 *.png
+
+# Tệp chứa kết quả huấn luyện
+runs/
+yolov8n_insects/

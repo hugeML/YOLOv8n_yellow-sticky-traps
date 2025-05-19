@@ -1,5 +1,8 @@
 opencv-python
-sahi==0.11
+sahi==0.11.18
 ultralytics>=8.0.0
 numpy
 xmltodict
+matplotlib
+seaborn
+ultralytics
