@@ -1,5 +1,5 @@
 # YOLOv8n_yellow-sticky-traps
-Dự án sử dụng mô hình YOLOv8n cho bài toán nhận diện côn trùng trên bẫy dính vàng trong nhà kính.
+Dự án sử dụng mô hình YOLOv8n kết hợp SAHI cho bài toán nhận diện côn trùng trên bẫy dính vàng trong nhà kính.
 
 
 ##
